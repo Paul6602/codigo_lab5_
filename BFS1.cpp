@@ -1,23 +1,35 @@
 #include<bits/stdc++.h>
-using namespace std;
+using namespace::std;
+
+
+vector<int> BFS(vector<int> &src, int n, vector<vector<int>> &G) {
+    vector<int> D(n, -1); 
+    queue<int> Q;
+
+  
+    for (auto &x : src) {
+        D[x] = 0;
+        Q.emplace(x);
+    }
+
+    while (not Q.empty()) {
+        int u = Q.front(); 
+        Q.pop();
+
+        for (int &v : G[u]) {
+            if (D[v] != -1) continue; 
+            
+            D[v] = D[u] + 1;
+            Q.emplace(v);
+        }
+    }
+    return D;
+}
 
 int main() {
+   
     
+  
     
-    int n, m, q; // n = vértices, m = aristas, q = consultas
-    if (!(cin >> n >> m)) return 0; // Lectura segura
-    
-    // Lista de adyacencia usando 1-indexación
-    vector<vector<int>> G(n + 1, vector<int>());[cite: 143]
-    
-    for (int i = 0; i < m; ++i) {[cite: 143]
-        int u, v;
-        cin >> u >> v;[cite: 143]
-        
-        G[u].emplace_back(v);[cite: 143]
-        G[v].emplace_back(u); // Quita esta línea si el grafo es dirigido
-    }
-    
-    //lógica 
-    
+    return 0;
 }
