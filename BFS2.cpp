@@ -1,23 +1,37 @@
 #include<bits/stdc++.h>
-using namespace std;
+using namespace::std;
 
-int main() {
+int BFS_Grilla(int sx, int sy, int tx, int ty, int n, int m, vector<string> &s) {
     
+    vector<int> dx = {1, -1, 0, 0};
+    vector<int> dy = {0, 0, 1, -1};
     
-    int n, m, q; // n = vértices, m = aristas, q = consultas
-    if (!(cin >> n >> m)) return 0; // Lectura segura
-    
-    // Lista de adyacencia usando 1-indexación
-    vector<vector<int>> G(n + 1, vector<int>());[cite: 143]
-    
-    for (int i = 0; i < m; ++i) {[cite: 143]
-        int u, v;
-        cin >> u >> v;[cite: 143]
-        
-        G[u].emplace_back(v);[cite: 143]
-        G[v].emplace_back(u); // Quita esta línea si el grafo es dirigido
+    vector<vector<int>> D(n, vector<int>(m, -1));
+    queue<pair<int, int>> Q;
+
+    Q.emplace(sx, sy);
+    D[sx][sy] = 0;
+
+    while (not Q.empty()) {
+        int ux, uy;
+        tie(ux, uy) = Q.front();
+        Q.pop();
+
+     
+        if (ux == tx and uy == ty) return D[ux][uy]; 
+
+        for (int k = 0; k < 4; ++k) {
+            int vx = ux + dx[k];
+            int vy = uy + dy[k];
+
+           
+            if (vx < 0 or vy < 0 or vx >= n or vy >= m) continue;
+            if (s[vx][vy] == '#') continue; 
+            if (D[vx][vy] != -1) continue;  
+
+            D[vx][vy] = D[ux][uy] + 1;
+            Q.emplace(vx, vy);
+        }
     }
-    
-    //lógica 
-    
+    return -1;
 }
